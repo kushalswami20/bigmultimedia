@@ -56,7 +56,7 @@ router.get('/instagram/callback', async (req, res) => {
     }
 
     // Redirect to frontend with user data
-    res.redirect(`http://localhost:3000/?userId=${user._id}&username=${userData.username}`);
+    res.redirect(`https://bigmultimedia-psfb.vercel.app/?userId=${user._id}&username=${userData.username}`);
   } catch (err) {
     console.error('Callback Error:', err);
     res.status(500).json({ error: 'Internal server error' });
