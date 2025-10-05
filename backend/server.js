@@ -11,8 +11,8 @@ const app = express();
 
 // ✅ Define allowed origins for both local and production
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://bigmultimedia-psfb.vercel.app"
+  "https://bigmultimedia-psfb.vercel.app",
+  "http://localhost:5173"
 ];
 
 // ✅ Use dynamic CORS configuration
