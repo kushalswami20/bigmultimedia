@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thirdweb Studio - AI Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                    heading: ['Inter', 'sans-serif'],
+                },
+                colors: {
+                  'brand-purple': '#8B5CF6',
+                  'brand-green': '#22c55e',
+                  'brand-blue': '#3b82f6',
+                  'bg-primary': '#000000',
+                  'bg-surface': '#1A1A1A',
+                  'text-primary': '#FFFFFF',
+                  'text-secondary': '#FFFFFF99',
+                  'border-color': 'rgba(255, 255, 255, 0.1)',
+                },
+                boxShadow: {
+                  'glow-purple': '0 0 15px rgba(139, 92, 246, 0.6)',
+                  'glow-green': '0 0 15px rgba(34, 197, 94, 0.6)',
+                  'glow-blue': '0 0 15px rgba(59, 130, 246, 0.6)',
+                }
+            }
+        }
+    }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "recharts": "https://aistudiocdn.com/recharts@^3.2.0",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.1",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-bg-primary text-text-primary ">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>
