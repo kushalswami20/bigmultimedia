@@ -8,9 +8,9 @@ const cors = require('cors'); // Add this
 dotenv.config();
 
 const app = express();
-
+app.use('/api/webhook', require('./src/routes/webhook'));
 // Middleware
-app.use(cors({ origin: 'http://localhost:5173' })); // Allow requests from frontend
+app.use(cors({ origin: 'http://localhost:5173', 'https://bigmultimedia-psfb.vercel.app' })); // Allow requests from frontend
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
@@ -27,6 +27,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://marketing:marketing@c
 
 // Routes
 app.use('/api/auth', require('./src/routes/authRoutes'));
+
+app.use('/api/subscriptions', require('./src/routes/subscriptions'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

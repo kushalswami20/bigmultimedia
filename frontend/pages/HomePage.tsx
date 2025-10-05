@@ -34,7 +34,7 @@ const handleInstagramLogin = async (e: React.FormEvent) => {
   setError(null);
 
   try {
-    const response = await fetch('http://localhost:3000/api/auth/instagram/init', { // Updated URL
+    const response = await fetch('https://bigmultimedia-backend.onrender.com/api/auth/instagram/init', { // Updated URL
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username }),
