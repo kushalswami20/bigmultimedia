@@ -3,34 +3,56 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
-const cors = require('cors'); // Add this
+const cors = require('cors');
 
 dotenv.config();
 
 const app = express();
-app.use('/api/webhook', require('./src/routes/webhook'));
+
+// ✅ Define allowed origins for both local and production
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://bigmultimedia-psfb.vercel.app"
+];
+
+// ✅ Use dynamic CORS configuration
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
+
 // Middleware
-app.use(cors({ origin: 'http://localhost:5173', 'https://bigmultimedia-psfb.vercel.app' })); // Allow requests from frontend
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Optional: security header
 app.use((req, res, next) => {
-  res.setHeader('Permissions-Policy', 'unload=()'); // Allow unload if needed
+  res.setHeader('Permissions-Policy', 'unload=()');
   next();
 });
+
 // Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://marketing:marketing@cluster0.c0szoww.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect(process.env.MONGODB_URI , {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+.then(() => console.log('Connected to MongoDB'))
+.catch(err => console.error('MongoDB connection error:', err));
 
 // Routes
+app.use('/api/webhook', require('./src/routes/webhook'));
 app.use('/api/auth', require('./src/routes/authRoutes'));
-
 app.use('/api/subscriptions', require('./src/routes/subscriptions'));
 
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
